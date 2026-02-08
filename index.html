@@ -467,47 +467,28 @@
             object-fit: cover;
         }
 
-        /* Baroque painting frame */
+        /* Baroque painting frame — border-image from ornate SVG */
         .painting-frame {
             position: relative;
-            padding: 10px;
-            background: linear-gradient(145deg,
-                #C8A55A 0%, #9E7B30 12%, #D4B87A 28%,
-                #86601A 50%, #C8A55A 72%, #A0803A 88%, #D4B87A 100%);
+            border: 40px solid transparent;
+            border-image: url('frame.svg') 100 fill / 40px / 0 round;
             box-shadow:
-                0 6px 30px rgba(26, 23, 20, 0.25),
-                0 2px 8px rgba(26, 23, 20, 0.15),
-                0 0 0 1px rgba(60, 45, 20, 0.6),
-                inset 0 0 0 1px rgba(210, 185, 130, 0.5),
-                inset 0 1px 3px rgba(0, 0, 0, 0.15),
-                inset 0 -1px 3px rgba(255, 240, 200, 0.1);
-        }
-
-        .painting-frame::before {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            right: 3px;
-            bottom: 3px;
-            border: 1px solid rgba(60, 45, 20, 0.35);
-            pointer-events: none;
-        }
-
-        .painting-frame::after {
-            content: '';
-            position: absolute;
-            top: 7px;
-            left: 7px;
-            right: 7px;
-            bottom: 7px;
-            border: 1px solid rgba(210, 185, 130, 0.25);
-            pointer-events: none;
+                0 8px 40px rgba(26, 23, 20, 0.3),
+                0 2px 12px rgba(26, 23, 20, 0.2);
+            background: none;
+            padding: 0;
         }
 
         .painting-frame .visual-break__img {
-            border: 1px solid rgba(40, 30, 15, 0.5);
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15);
+            border: none;
+            box-shadow: none;
+        }
+
+        @media (max-width: 480px) {
+            .painting-frame {
+                border-width: 24px;
+                border-image: url('frame.svg') 100 fill / 24px / 0 round;
+            }
         }
 
         .visual-break__caption {
@@ -579,27 +560,34 @@
 
         .section-wrap__cloud {
             position: absolute;
-            width: clamp(200px, 25vw, 400px);
             height: auto;
             opacity: 0;
             pointer-events: none;
             mix-blend-mode: multiply;
-            transition: opacity 2s ease;
+            transition: opacity 2.5s ease;
             will-change: transform;
         }
 
-        .section-wrap__cloud--left {
-            left: calc(-1 * clamp(200px, 25vw, 400px) * 0.6);
-            top: -20px;
+        .section-wrap__cloud--1 {
+            width: clamp(280px, 30vw, 500px);
+            left: calc(-1 * clamp(280px, 30vw, 500px) * 0.5);
+            top: -40px;
         }
 
-        .section-wrap__cloud--right {
-            right: calc(-1 * clamp(200px, 25vw, 400px) * 0.55);
-            top: 40%;
+        .section-wrap__cloud--2 {
+            width: clamp(320px, 35vw, 550px);
+            right: calc(-1 * clamp(320px, 35vw, 550px) * 0.45);
+            top: 25%;
+        }
+
+        .section-wrap__cloud--3 {
+            width: clamp(250px, 22vw, 420px);
+            left: calc(-1 * clamp(250px, 22vw, 420px) * 0.35);
+            top: 55%;
         }
 
         .section-wrap--clouds.clouds-visible .section-wrap__cloud {
-            opacity: 0.09;
+            opacity: 0.13;
         }
 
         @media (max-width: 1100px) {
@@ -670,7 +658,7 @@
             .pull-quote { padding: 2rem 1.2rem; }
             .footer { padding: 2.5rem 1.2rem; }
             .inscription { margin-left: 0; margin-right: 0; }
-            .painting-frame { padding: 6px; }
+            .painting-frame { border-width: 18px; border-image: url('frame.svg') 100 fill / 18px / 0 round; }
         }
 
         @media print {
@@ -741,7 +729,9 @@
 
             <!-- VISUAL BREAK 1 -->
             <div class="visual-break">
-                <img class="visual-break__img visual-break__img--contain" src="https://media1.tenor.com/m/dlLdNF3Z-CUAAAAd/the-big-lebowski-thats-like-your-opinion-man.gif" alt="The Big Lebowski — 'That's just, like, your opinion, man'" loading="lazy">
+                <div class="painting-frame">
+                    <img class="visual-break__img visual-break__img--contain" src="https://media1.tenor.com/m/dlLdNF3Z-CUAAAAd/the-big-lebowski-thats-like-your-opinion-man.gif" alt="The Big Lebowski — 'That's just, like, your opinion, man'" loading="lazy">
+                </div>
                 <p class="visual-break__caption">The Big Lebowski (1998)</p>
             </div>
 
@@ -779,7 +769,9 @@
 
         <!-- VISUAL BREAK 2 -->
         <div class="visual-break">
-            <img class="visual-break__img visual-break__img--contain" src="https://media1.tenor.com/m/sZt41jOM4zMAAAAd/drinking-wine-rain-drinking.gif" alt="Wine tasting — the trained palate" loading="lazy">
+            <div class="painting-frame">
+                <img class="visual-break__img visual-break__img--contain" src="https://media1.tenor.com/m/sZt41jOM4zMAAAAd/drinking-wine-rain-drinking.gif" alt="Wine tasting — the trained palate" loading="lazy">
+            </div>
             <p class="visual-break__caption">The author, demonstrating taste.</p>
         </div>
 
@@ -796,8 +788,9 @@
              ============================================================ -->
 
         <div class="section-wrap--clouds">
-            <img class="section-wrap__cloud section-wrap__cloud--left" src="cloud_L.svg" alt="" aria-hidden="true" data-parallax-speed="-0.15">
-            <img class="section-wrap__cloud section-wrap__cloud--right" src="cloud_R.svg" alt="" aria-hidden="true" data-parallax-speed="0.12">
+            <img class="section-wrap__cloud section-wrap__cloud--1" src="cloud1.png" alt="" aria-hidden="true" data-parallax-speed="-0.25" data-parallax-x="0.08">
+            <img class="section-wrap__cloud section-wrap__cloud--2" src="cloud2.png" alt="" aria-hidden="true" data-parallax-speed="0.2" data-parallax-x="-0.06">
+            <img class="section-wrap__cloud section-wrap__cloud--3" src="cloud3.png" alt="" aria-hidden="true" data-parallax-speed="-0.18" data-parallax-x="0.1">
 
             <section class="section">
                 <span class="section__number">III</span>
@@ -1102,8 +1095,10 @@
                     // [A, M] Parallax elements (Hume portraits + clouds)
                     parallaxEls.forEach(el => {
                         const speed = parseFloat(el.dataset.parallaxSpeed);
+                        const xSpeed = parseFloat(el.dataset.parallaxX) || 0;
                         const yOffset = scrollY * speed;
-                        el.style.transform = 'translateY(' + yOffset + 'px)';
+                        const xOffset = scrollY * xSpeed;
+                        el.style.transform = 'translate(' + xOffset + 'px, ' + yOffset + 'px)';
                     });
 
                     // [I] Color temperature shift

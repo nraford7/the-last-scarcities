@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <linearGradient id="goldBody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D8C070"/>
+      <stop offset="18%" stop-color="#A88430"/>
+      <stop offset="35%" stop-color="#D4B870"/>
+      <stop offset="52%" stop-color="#8A6A20"/>
+      <stop offset="68%" stop-color="#C8A858"/>
+      <stop offset="85%" stop-color="#9E7828"/>
+      <stop offset="100%" stop-color="#D4B060"/>
+    </linearGradient>
+    <linearGradient id="goldHL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ECD890"/>
+      <stop offset="30%" stop-color="#C8A050"/>
+      <stop offset="70%" stop-color="#907028"/>
+      <stop offset="100%" stop-color="#C8A858"/>
+    </linearGradient>
+    <linearGradient id="goldVL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ECD890"/>
+      <stop offset="30%" stop-color="#C8A050"/>
+      <stop offset="70%" stop-color="#907028"/>
+      <stop offset="100%" stop-color="#C8A858"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- FRAME BODY — cutout center             -->
+  <!-- ═══════════════════════════════════════ -->
+  <path d="M0,0 H500 V500 H0 Z M100,100 H400 V400 H100 Z"
+        fill="url(#goldBody)" fill-rule="evenodd"/>
+
+  <!-- Edge gradient overlays for molding profile -->
+  <rect x="100" y="0" width="300" height="100" fill="url(#goldHL)" opacity="0.5"/>
+  <rect x="100" y="400" width="300" height="100" fill="url(#goldHL)" opacity="0.4"/>
+  <rect x="0" y="100" width="100" height="300" fill="url(#goldVL)" opacity="0.5"/>
+  <rect x="400" y="100" width="100" height="300" fill="url(#goldVL)" opacity="0.4"/>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- MOLDING PROFILE — concentric ridges     -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <!-- Outer dark edge -->
+  <rect x="0" y="0" width="500" height="500" fill="none" stroke="#3A2508" stroke-width="5"/>
+  <!-- Outer highlight -->
+  <rect x="4" y="4" width="492" height="492" fill="none" stroke="#ECD890" stroke-width="2" opacity="0.55"/>
+
+  <!-- First ridge (outer torus) -->
+  <rect x="14" y="14" width="472" height="472" fill="none" stroke="#C8A858" stroke-width="3" opacity="0.7"/>
+  <rect x="20" y="20" width="460" height="460" fill="none" stroke="#5A3A10" stroke-width="2" opacity="0.6"/>
+
+  <!-- Flat band -->
+  <rect x="30" y="30" width="440" height="440" fill="none" stroke="#B89848" stroke-width="2" opacity="0.4"/>
+
+  <!-- Second ridge (inner torus) -->
+  <rect x="42" y="42" width="416" height="416" fill="none" stroke="#D4B870" stroke-width="3" opacity="0.6"/>
+  <rect x="50" y="50" width="400" height="400" fill="none" stroke="#6A4A10" stroke-width="2" opacity="0.55"/>
+
+  <!-- Third ridge -->
+  <rect x="60" y="60" width="380" height="380" fill="none" stroke="#C8A858" stroke-width="2.5" opacity="0.5"/>
+  <rect x="68" y="68" width="364" height="364" fill="none" stroke="#4A3010" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Inner groove (deep channel) -->
+  <rect x="82" y="82" width="336" height="336" fill="none" stroke="#2A1808" stroke-width="5"/>
+  <!-- Inner lip highlight -->
+  <rect x="88" y="88" width="324" height="324" fill="none" stroke="#D4B870" stroke-width="3"/>
+  <!-- Inner edge -->
+  <rect x="95" y="95" width="310" height="310" fill="none" stroke="#4A3010" stroke-width="3"/>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- CORNER ORNAMENTS — baroque scrollwork   -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <!-- Top-left corner -->
+  <g>
+    <!-- Acanthus leaf main scroll -->
+    <path d="M12,12 Q50,4 68,22 Q82,40 65,55 Q50,65 40,52 Q33,42 42,35 Q50,30 52,40"
+          fill="none" stroke="#E0CA80" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M12,12 Q4,50 22,68 Q40,82 55,65 Q65,50 52,40 Q42,33 35,42 Q30,50 40,52"
+          fill="none" stroke="#E0CA80" stroke-width="4.5" stroke-linecap="round"/>
+
+    <!-- Inner scroll highlights -->
+    <path d="M16,16 Q48,10 62,26 Q72,40 58,50 Q48,56 42,46"
+          fill="none" stroke="#F0E0A0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    <path d="M16,16 Q10,48 26,62 Q40,72 50,58 Q56,48 46,42"
+          fill="none" stroke="#F0E0A0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Leaf shapes filling scroll interior -->
+    <path d="M28,18 Q45,10 52,25 Q48,38 32,30 Z" fill="#C8A858" stroke="#8A6A20" stroke-width="1"/>
+    <path d="M18,28 Q10,45 25,52 Q38,48 30,32 Z" fill="#C8A858" stroke="#8A6A20" stroke-width="1"/>
+
+    <!-- Secondary small scrolls -->
+    <path d="M70,14 Q80,10 82,20 Q80,28 74,24" fill="none" stroke="#D4B870" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <path d="M14,70 Q10,80 20,82 Q28,80 24,74" fill="none" stroke="#D4B870" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- Rosette center -->
+    <circle cx="18" cy="18" r="8" fill="#D4B870" stroke="#7A5820" stroke-width="2"/>
+    <circle cx="18" cy="18" r="4.5" fill="#ECD890" stroke="#A88430" stroke-width="1"/>
+    <circle cx="18" cy="18" r="2" fill="#F0E0A0"/>
+
+    <!-- Shell/fan radiating from rosette -->
+    <path d="M18,18 L30,8" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L34,14" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L8,30" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L14,34" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- Top-right corner (mirrored) -->
+  <g transform="translate(500,0) scale(-1,1)">
+    <path d="M12,12 Q50,4 68,22 Q82,40 65,55 Q50,65 40,52 Q33,42 42,35 Q50,30 52,40"
+          fill="none" stroke="#E0CA80" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M12,12 Q4,50 22,68 Q40,82 55,65 Q65,50 52,40 Q42,33 35,42 Q30,50 40,52"
+          fill="none" stroke="#E0CA80" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M16,16 Q48,10 62,26 Q72,40 58,50 Q48,56 42,46"
+          fill="none" stroke="#F0E0A0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    <path d="M16,16 Q10,48 26,62 Q40,72 50,58 Q56,48 46,42"
+          fill="none" stroke="#F0E0A0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    <path d="M28,18 Q45,10 52,25 Q48,38 32,30 Z" fill="#C8A858" stroke="#8A6A20" stroke-width="1"/>
+    <path d="M18,28 Q10,45 25,52 Q38,48 30,32 Z" fill="#C8A858" stroke="#8A6A20" stroke-width="1"/>
+    <path d="M70,14 Q80,10 82,20 Q80,28 74,24" fill="none" stroke="#D4B870" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <path d="M14,70 Q10,80 20,82 Q28,80 24,74" fill="none" stroke="#D4B870" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="18" cy="18" r="8" fill="#D4B870" stroke="#7A5820" stroke-width="2"/>
+    <circle cx="18" cy="18" r="4.5" fill="#ECD890" stroke="#A88430" stroke-width="1"/>
+    <circle cx="18" cy="18" r="2" fill="#F0E0A0"/>
+    <path d="M18,18 L30,8" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L34,14" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L8,30" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L14,34" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- Bottom-left corner (mirrored) -->
+  <g transform="translate(0,500) scale(1,-1)">
+    <path d="M12,12 Q50,4 68,22 Q82,40 65,55 Q50,65 40,52 Q33,42 42,35 Q50,30 52,40"
+          fill="none" stroke="#E0CA80" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M12,12 Q4,50 22,68 Q40,82 55,65 Q65,50 52,40 Q42,33 35,42 Q30,50 40,52"
+          fill="none" stroke="#E0CA80" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M16,16 Q48,10 62,26 Q72,40 58,50 Q48,56 42,46"
+          fill="none" stroke="#F0E0A0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    <path d="M16,16 Q10,48 26,62 Q40,72 50,58 Q56,48 46,42"
+          fill="none" stroke="#F0E0A0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    <path d="M28,18 Q45,10 52,25 Q48,38 32,30 Z" fill="#C8A858" stroke="#8A6A20" stroke-width="1"/>
+    <path d="M18,28 Q10,45 25,52 Q38,48 30,32 Z" fill="#C8A858" stroke="#8A6A20" stroke-width="1"/>
+    <path d="M70,14 Q80,10 82,20 Q80,28 74,24" fill="none" stroke="#D4B870" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <path d="M14,70 Q10,80 20,82 Q28,80 24,74" fill="none" stroke="#D4B870" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="18" cy="18" r="8" fill="#D4B870" stroke="#7A5820" stroke-width="2"/>
+    <circle cx="18" cy="18" r="4.5" fill="#ECD890" stroke="#A88430" stroke-width="1"/>
+    <circle cx="18" cy="18" r="2" fill="#F0E0A0"/>
+    <path d="M18,18 L30,8" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L34,14" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L8,30" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L14,34" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- Bottom-right corner (mirrored) -->
+  <g transform="translate(500,500) scale(-1,-1)">
+    <path d="M12,12 Q50,4 68,22 Q82,40 65,55 Q50,65 40,52 Q33,42 42,35 Q50,30 52,40"
+          fill="none" stroke="#E0CA80" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M12,12 Q4,50 22,68 Q40,82 55,65 Q65,50 52,40 Q42,33 35,42 Q30,50 40,52"
+          fill="none" stroke="#E0CA80" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M16,16 Q48,10 62,26 Q72,40 58,50 Q48,56 42,46"
+          fill="none" stroke="#F0E0A0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    <path d="M16,16 Q10,48 26,62 Q40,72 50,58 Q56,48 46,42"
+          fill="none" stroke="#F0E0A0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    <path d="M28,18 Q45,10 52,25 Q48,38 32,30 Z" fill="#C8A858" stroke="#8A6A20" stroke-width="1"/>
+    <path d="M18,28 Q10,45 25,52 Q38,48 30,32 Z" fill="#C8A858" stroke="#8A6A20" stroke-width="1"/>
+    <path d="M70,14 Q80,10 82,20 Q80,28 74,24" fill="none" stroke="#D4B870" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <path d="M14,70 Q10,80 20,82 Q28,80 24,74" fill="none" stroke="#D4B870" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="18" cy="18" r="8" fill="#D4B870" stroke="#7A5820" stroke-width="2"/>
+    <circle cx="18" cy="18" r="4.5" fill="#ECD890" stroke="#A88430" stroke-width="1"/>
+    <circle cx="18" cy="18" r="2" fill="#F0E0A0"/>
+    <path d="M18,18 L30,8" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L34,14" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L8,30" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+    <path d="M18,18 L14,34" stroke="#B89848" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- EDGE CENTER ORNAMENTS                   -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <!-- Top center cartouche -->
+  <g transform="translate(250,40)">
+    <ellipse cx="0" cy="0" rx="18" ry="12" fill="#C8A858" stroke="#7A5820" stroke-width="1.5"/>
+    <path d="M-18,0 Q-28,-8 -22,-5 M18,0 Q28,-8 22,-5" stroke="#D4B870" stroke-width="2.5" fill="none" opacity="0.7"/>
+    <ellipse cx="0" cy="0" rx="10" ry="6" fill="#D4B870" stroke="#9A7830" stroke-width="1"/>
+  </g>
+
+  <!-- Bottom center cartouche -->
+  <g transform="translate(250,460)">
+    <ellipse cx="0" cy="0" rx="18" ry="12" fill="#C8A858" stroke="#7A5820" stroke-width="1.5"/>
+    <path d="M-18,0 Q-28,8 -22,5 M18,0 Q28,8 22,5" stroke="#D4B870" stroke-width="2.5" fill="none" opacity="0.7"/>
+    <ellipse cx="0" cy="0" rx="10" ry="6" fill="#D4B870" stroke="#9A7830" stroke-width="1"/>
+  </g>
+
+  <!-- Left center cartouche -->
+  <g transform="translate(40,250)">
+    <ellipse cx="0" cy="0" rx="12" ry="18" fill="#C8A858" stroke="#7A5820" stroke-width="1.5"/>
+    <path d="M0,-18 Q-8,-28 -5,-22 M0,18 Q-8,28 -5,22" stroke="#D4B870" stroke-width="2.5" fill="none" opacity="0.7"/>
+    <ellipse cx="0" cy="0" rx="6" ry="10" fill="#D4B870" stroke="#9A7830" stroke-width="1"/>
+  </g>
+
+  <!-- Right center cartouche -->
+  <g transform="translate(460,250)">
+    <ellipse cx="0" cy="0" rx="12" ry="18" fill="#C8A858" stroke="#7A5820" stroke-width="1.5"/>
+    <path d="M0,-18 Q8,-28 5,-22 M0,18 Q8,28 5,22" stroke="#D4B870" stroke-width="2.5" fill="none" opacity="0.7"/>
+    <ellipse cx="0" cy="0" rx="6" ry="10" fill="#D4B870" stroke="#9A7830" stroke-width="1"/>
+  </g>
+</svg>
