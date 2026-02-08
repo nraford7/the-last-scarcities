@@ -62,11 +62,45 @@
             background-color: var(--cream);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: clip;
+        }
+
+        /* [D] Full-page paper grain texture */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            z-index: 9998;
         }
 
         ::selection {
             background-color: var(--accent);
             color: var(--cream);
+        }
+
+        /* [K] Reading progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            width: 0%;
+            z-index: 10000;
+            transition: width 0.08s linear;
+        }
+
+        /* [J] Custom cursor on article text */
+        .article {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 17 17'%3E%3Cline x1='8.5' y1='1' x2='8.5' y2='6.5' stroke='%236B6158' stroke-width='0.8' stroke-linecap='round'/%3E%3Cline x1='8.5' y1='10.5' x2='8.5' y2='16' stroke='%236B6158' stroke-width='0.8' stroke-linecap='round'/%3E%3Cline x1='1' y1='8.5' x2='6.5' y2='8.5' stroke='%236B6158' stroke-width='0.8' stroke-linecap='round'/%3E%3Cline x1='10.5' y1='8.5' x2='16' y2='8.5' stroke='%236B6158' stroke-width='0.8' stroke-linecap='round'/%3E%3C/svg%3E") 8 8, text;
         }
 
         /* ========================================
@@ -79,20 +113,6 @@
             background: linear-gradient(180deg, var(--cream-warm) 0%, var(--cream) 100%);
         }
 
-        .header-wrap::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-            background-size: 256px 256px;
-            pointer-events: none;
-            mix-blend-mode: multiply;
-        }
-
         .header-wrap__hume {
             position: absolute;
             top: 0;
@@ -101,6 +121,7 @@
             opacity: 0.12;
             pointer-events: none;
             mix-blend-mode: multiply;
+            will-change: transform;
         }
 
         .header-wrap__hume--left {
@@ -194,6 +215,7 @@
             opacity: 0;
             transform: translateY(16px);
             transition: opacity 0.9s ease, transform 0.9s ease;
+            position: relative;
         }
 
         .section.visible {
@@ -224,6 +246,7 @@
             opacity: 1;
         }
 
+        /* [C] Section number reveal — quill-draw clip */
         .section__number {
             display: block;
             text-align: center;
@@ -233,6 +256,12 @@
             letter-spacing: 0.08em;
             color: var(--rule);
             margin-bottom: 0.8rem;
+            clip-path: inset(0 100% 0 0);
+            transition: clip-path 1s ease 0.2s;
+        }
+
+        .section.visible .section__number {
+            clip-path: inset(0 0 0 0);
         }
 
         .section__heading {
@@ -273,7 +302,7 @@
 
         ol li:last-child, ul li:last-child { margin-bottom: 0; }
 
-        /* Drop cap */
+        /* [B] Drop cap — ink-bleed effect */
         .lead::first-letter {
             float: left;
             font-family: var(--font-display);
@@ -283,7 +312,16 @@
             padding-top: 0.25rem;
             color: var(--accent);
             font-weight: 400;
-            opacity: 0.8;
+            opacity: 0.85;
+            text-shadow:
+                0 0 2px rgba(139, 46, 46, 0.15),
+                1px 1px 4px rgba(106, 31, 31, 0.08),
+                0 0 8px rgba(139, 46, 46, 0.05);
+            background: radial-gradient(circle at 45% 55%, var(--accent) 0%, var(--accent-deep) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: url('#ink-bleed');
         }
 
         .aside-voice {
@@ -295,12 +333,27 @@
            BLOCKQUOTES / INSCRIPTIONS
            ======================================== */
 
+        /* [L] Inscription glow — illuminated manuscript effect */
         .inscription {
             margin: 2.5rem 0;
             padding: 2rem 0;
             border-top: 1px solid var(--rule-light);
             border-bottom: 1px solid var(--rule-light);
             text-align: center;
+            position: relative;
+        }
+
+        .inscription::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 130%;
+            height: 250%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(ellipse, rgba(212, 186, 140, 0.07) 0%, rgba(212, 186, 140, 0.03) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         .inscription__text {
@@ -333,6 +386,17 @@
             margin: 0 auto;
         }
 
+        /* [G] Pull quote typewriter — word-by-word reveal */
+        .pq-word {
+            opacity: 0;
+            display: inline;
+            transition: opacity 0.45s ease;
+        }
+
+        .pq-word.revealed {
+            opacity: 1;
+        }
+
         /* ========================================
            DIVIDERS
            ======================================== */
@@ -352,10 +416,20 @@
             background: var(--rule);
         }
 
+        /* [F] Animated fleuron — subtle bloom on reveal */
         .divider__fleuron {
             font-size: 1rem;
             color: var(--rule);
             line-height: 1;
+            display: inline-block;
+            transform: scale(0.5) rotate(-10deg);
+            opacity: 0;
+            transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+        }
+
+        .divider.visible .divider__fleuron {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
         }
 
         /* ========================================
@@ -393,6 +467,32 @@
             object-fit: cover;
         }
 
+        /* [E] Hover-reveal captions — museum label style */
+        .visual-break--hover-cap {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visual-break--hover-cap .visual-break__caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem 1.5rem 1rem;
+            background: linear-gradient(transparent, rgba(26, 23, 20, 0.6));
+            color: var(--cream);
+            text-align: center;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            margin-top: 0;
+        }
+
+        .visual-break--hover-cap:hover .visual-break__caption {
+            opacity: 1;
+        }
+
         .visual-break__caption {
             font-family: var(--font-body);
             font-size: 0.75rem;
@@ -410,6 +510,83 @@
             color: var(--accent-deep);
             text-align: center;
             padding: clamp(2rem, 4vw, 3rem) 0;
+        }
+
+        /* ========================================
+           [H] MARGIN NOTES — scholarly sidenotes
+           ======================================== */
+
+        .margin-note {
+            display: none;
+        }
+
+        @media (min-width: 1200px) {
+            .margin-note {
+                display: block;
+                position: absolute;
+                width: 150px;
+                font-family: var(--font-body);
+                font-size: 0.62rem;
+                font-style: italic;
+                line-height: 1.55;
+                color: var(--caption);
+                border-top: 1px solid var(--rule-light);
+                padding-top: 0.5rem;
+                opacity: 0;
+                transition: opacity 0.8s ease 0.6s;
+            }
+
+            .section.visible .margin-note {
+                opacity: 1;
+            }
+
+            .margin-note--left {
+                left: calc(-150px - 40px);
+                text-align: right;
+            }
+
+            .margin-note--right {
+                right: calc(-150px - 40px);
+                text-align: left;
+            }
+        }
+
+        /* ========================================
+           [M] CLOUD ENGRAVINGS — section III
+           ======================================== */
+
+        .section-wrap--clouds {
+            position: relative;
+            overflow: visible;
+        }
+
+        .section-wrap__cloud {
+            position: absolute;
+            width: clamp(200px, 25vw, 400px);
+            height: auto;
+            opacity: 0;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            transition: opacity 2s ease;
+            will-change: transform;
+        }
+
+        .section-wrap__cloud--left {
+            left: calc(-1 * clamp(200px, 25vw, 400px) * 0.6);
+            top: -20px;
+        }
+
+        .section-wrap__cloud--right {
+            right: calc(-1 * clamp(200px, 25vw, 400px) * 0.55);
+            top: 40%;
+        }
+
+        .section-wrap--clouds.clouds-visible .section-wrap__cloud {
+            opacity: 0.12;
+        }
+
+        @media (max-width: 1100px) {
+            .section-wrap__cloud { display: none; }
         }
 
         /* ========================================
@@ -465,7 +642,7 @@
         }
 
         /* ========================================
-           PRINT
+           RESPONSIVE
            ======================================== */
 
         @media (max-width: 480px) {
@@ -476,22 +653,53 @@
             .pull-quote { padding: 2rem 1.2rem; }
             .footer { padding: 2.5rem 1.2rem; }
             .inscription { margin-left: 0; margin-right: 0; }
+            /* [E] Always show captions on mobile */
+            .visual-break--hover-cap .visual-break__caption {
+                position: static;
+                background: none;
+                color: var(--caption);
+                opacity: 1;
+                padding: 0;
+                margin-top: 0.8rem;
+            }
         }
 
         @media print {
             body { background: white; }
+            body::after { display: none; }
+            .progress-bar { display: none; }
             .section, .visual-break, .pull-quote, .divider { opacity: 1; transform: none; }
+            .section__number { clip-path: none; }
+            .divider__fleuron { opacity: 1; transform: none; }
+            .pq-word { opacity: 1; }
+            .margin-note { display: block; opacity: 1; }
             .visual-break { break-inside: avoid; }
+            .visual-break--hover-cap .visual-break__caption {
+                position: static; background: none; color: var(--caption); opacity: 1; padding: 0; margin-top: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- [K] Reading progress bar -->
+    <div class="progress-bar" aria-hidden="true"></div>
+
+    <!-- [B] SVG filter for ink-bleed drop cap -->
+    <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+        <defs>
+            <filter id="ink-bleed">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
+
     <!-- HEADER -->
 
     <div class="header-wrap">
-        <img class="header-wrap__hume header-wrap__hume--left" src="Hume_L.jpg" alt="" aria-hidden="true">
-        <img class="header-wrap__hume header-wrap__hume--right" src="Hume_R.jpg" alt="" aria-hidden="true">
+        <img class="header-wrap__hume header-wrap__hume--left" src="Hume_L.jpg" alt="" aria-hidden="true" data-parallax-speed="-0.08">
+        <img class="header-wrap__hume header-wrap__hume--right" src="Hume_R.jpg" alt="" aria-hidden="true" data-parallax-speed="0.06">
         <header class="header">
             <p class="header__eyebrow">Essay</p>
             <h1 class="header__title">The Last Scarcities</h1>
@@ -514,6 +722,9 @@
             <span class="section__number">I</span>
             <h2 class="section__heading">The Mind That Contemplates</h2>
 
+            <!-- [H] Margin note -->
+            <aside class="margin-note margin-note--right" style="top: 6rem;">Hume, "Of the Standard of Taste," 1757</aside>
+
             <p class="lead">David Hume understood something in 1757 that most of us are only now beginning to grasp: <em>value is not a property of things but a quality of the mind.</em></p>
 
             <div class="inscription">
@@ -527,7 +738,7 @@
                 <img class="visual-break__img visual-break__img--contain" src="https://media1.tenor.com/m/dlLdNF3Z-CUAAAAd/the-big-lebowski-thats-like-your-opinion-man.gif" alt="The Big Lebowski — 'That's just, like, your opinion, man'" loading="lazy">
                 <p class="visual-break__caption">The Big Lebowski (1998)</p>
             </div>
-            
+
             <p>Hume rejects this, and that rejection may be one of the most important things to understand when it comes to the future of AI, work, and the economy.</p>
         </section>
 
@@ -549,7 +760,7 @@
             <p>Hume argues that while value originates in the mind, some minds are better at perceiving (or perhaps creating) value than others, just as some palates are better at detecting flavor.</p>
 
             <p><b>In other words, some people are better at judging quality and creating value.</b> This isn't because they have access to some kind of universal truth. It's because they possess a few very specific things that, according to Hume, make them rare and better positioned to judge taste.</p>
-            
+
             <ul>
                 <li>Refined senses, sharpened through exposure.</li>
                 <li>Decades of experience with the thing being judged.</li>
@@ -575,30 +786,41 @@
 
         <!-- ============================================================
              SECTION III — All That is Solid Melts into Air
+             [M] Cloud engravings flank this section
              ============================================================ -->
 
-        <section class="section">
-            <span class="section__number">III</span>
-            <h2 class="section__heading">All That is Solid Melts into Air</h2>
+        <div class="section-wrap--clouds">
+            <img class="section-wrap__cloud section-wrap__cloud--left" src="cloud_L.svg" alt="" aria-hidden="true" data-parallax-speed="-0.04">
+            <img class="section-wrap__cloud section-wrap__cloud--right" src="cloud_R.svg" alt="" aria-hidden="true" data-parallax-speed="0.05">
 
-            <p>This matters a lot now, and will matter a lot more in the future, because of AI.</p>
+            <section class="section">
+                <span class="section__number">III</span>
+                <h2 class="section__heading">All That is Solid Melts into Air</h2>
 
-            <p>Here is my thesis:</p>
+                <!-- [H] Margin note -->
+                <aside class="margin-note margin-note--left" style="top: 2rem;">Marx &amp; Engels, The Communist Manifesto, 1848</aside>
 
-            <ol>
-                <li><b>Large language models are driving the value of knowledge toward zero.</b> Not slowly, not eventually — now. An LLM can retrieve, synthesize, and articulate essentially everything that has ever been written — all human knowledge — on demand.</li>
-                <li><b>Agents, meanwhile, are driving the value of managerial work to zero</b> — commoditizing the coordination, sequencing, and execution that once justified entire professional hierarchies, entire buildings full of people.</li>
-            </ol>
+                <p>This matters a lot now, and will matter a lot more in the future, because of AI.</p>
 
-            <p>If knowledge was the <i>what</i> then management was the <i>how</i>, and both are being commoditized at once.</p>
+                <p>Here is my thesis:</p>
 
-            <p><b>This is a big deal.</b></p>
-        </section>
+                <ol>
+                    <li><b>Large language models are driving the value of knowledge toward zero.</b> Not slowly, not eventually — now. An LLM can retrieve, synthesize, and articulate essentially everything that has ever been written — all human knowledge — on demand.</li>
+                    <li><b>Agents, meanwhile, are driving the value of managerial work to zero</b> — commoditizing the coordination, sequencing, and execution that once justified entire professional hierarchies, entire buildings full of people.</li>
+                </ol>
 
-        <!-- VISUAL BREAK 3 -->
+                <p>If knowledge was the <i>what</i> then management was the <i>how</i>, and both are being commoditized at once.</p>
+
+                <p><b>This is a big deal.</b></p>
+            </section>
+        </div>
+
+        <!-- VISUAL BREAK 3 — [E] hover caption -->
         <div class="visual-break">
-            <img class="visual-break__img visual-break__img--painting" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Giovanni_Paolo_Pannini_-_Capriccio_of_Classical_Ruins_-_WGA16965.jpg" alt="Giovanni Paolo Pannini — Capriccio of Classical Ruins" loading="lazy">
-            <p class="visual-break__caption">Giovanni Paolo Pannini, <em>Capriccio of Classical Ruins</em></p>
+            <div class="visual-break--hover-cap">
+                <img class="visual-break__img visual-break__img--painting" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Giovanni_Paolo_Pannini_-_Capriccio_of_Classical_Ruins_-_WGA16965.jpg" alt="Giovanni Paolo Pannini — Capriccio of Classical Ruins" loading="lazy">
+                <p class="visual-break__caption">Giovanni Paolo Pannini, <em>Capriccio of Classical Ruins</em></p>
+            </div>
         </div>
 
         <!-- Divider -->
@@ -620,7 +842,7 @@
             <p>Consulting, law, medicine, finance — these industries are built on this asymmetry. The consultant knew what the client did not. The doctor had studied what the patient had not read.</p>
 
             <p><b>That is changing.</b></p>
- 
+
             <p>In software, if agents can build any application on demand, the product itself stops being defensible. What becomes defensible is the taste layer on top — the curation, the specific point of view about how a tool should feel and what it should prioritize. When any agent can spin up a competent tool in minutes, choosing software becomes less like purchasing infrastructure and more like choosing what to wear.</p>
 
             <p>In consulting, any executive can now generate a McKinsey-quality analysis in an afternoon. What they <em>can't</em> generate is the senior partner's hard-won instinct that the real problem isn't market entry at all — it's that the CEO and CFO have fundamentally different visions and no framework will matter until that's resolved. The consulting firm of the future looks less like McKinsey and more like a blue-chip gallery: a small roster of trusted advisors whose clients are hiring <em>them</em>, not the logo.</p>
@@ -650,6 +872,9 @@
                 <p class="visual-break__caption" style="margin-top: 0.6rem;">Coco Chanel</p>
             </div>
 
+            <!-- [H] Margin note -->
+            <aside class="margin-note margin-note--right" style="top: 12rem;">Hume's "delicacy of taste" — a capacity trained through practice, not granted by nature</aside>
+
             <p>So what remains? What will be valuable in a world of AI?</p>
 
             <p>Hume spent his career trying to answer this question. His answers were <strong>taste, judgment, and trust</strong>.</p>
@@ -663,9 +888,9 @@
             <p><b>This is what remains.</b></p>
         </section>
 
-        <!-- PULL QUOTE -->
-        <aside class="pull-quote">
-            <p class="pull-quote__text">"Sentiment, refined by experience,<br> made social through trust."</p>
+        <!-- [G] PULL QUOTE — typewriter reveal -->
+        <aside class="pull-quote" data-typewriter>
+            <p class="pull-quote__text"><span class="pq-word">"Sentiment,</span> <span class="pq-word">refined</span> <span class="pq-word">by</span> <span class="pq-word">experience,</span><br> <span class="pq-word">made</span> <span class="pq-word">social</span> <span class="pq-word">through</span> <span class="pq-word">trust."</span></p>
         </aside>
 
         <!-- Divider -->
@@ -683,21 +908,26 @@
             <span class="section__number">V</span>
             <h2 class="section__heading">Life Imitates (the Art Market)</h2>
 
+            <!-- [H] Margin note -->
+            <aside class="margin-note margin-note--left" style="top: 1rem;">The art market as economic model for post-AI industries</aside>
+
             <p>The art world has understood this for centuries.</p>
 
             <p>A painting is, materially, canvas and pigment. The physical inputs are worth almost nothing. And yet a Basquiat sells for $110 million while a technically superior painting by an unknown artist sells for $400 at a street fair. This is not a market mispricing. It is a market that has <em>correctly identified what's scarce</em>.</p>
 
             <p>The scarce thing is not the object. It's the chain of judgment (and trust) surrounding it: the artist's vision, the curator who recognized it early, the gallery that staked their reputation on showing it, the critic whose essay framed why it mattered, and the collector whose willingness to pay became its own signal of worth. Every transaction in the art market is a transaction based entirely on, and further compounding, trust and taste.</p>
 
-            <p>Larry Gagosian doesn't run the world's most powerful gallery because he has more information about art than anyone else. He runs it because enough people with enough capital trust his <em>taste</em>.</P>
-            
+            <p>Larry Gagosian doesn't run the world's most powerful gallery because he has more information about art than anyone else. He runs it because enough people with enough capital trust his <em>taste</em>.</p>
+
             <p><b>His judgment is the product.</b> Everything else — the white-walled spaces, the glossy catalogs, the Venice Biennale dinners — is just infrastructure for delivering it.</p>
         </section>
 
-        <!-- VISUAL BREAK 5 -->
+        <!-- VISUAL BREAK 5 — [E] hover caption -->
         <div class="visual-break">
-            <img class="visual-break__img visual-break__img--painting visual-break__img--bounded" src="https://content-eu-kingandmcgaw-com.s3.eu-west-1.amazonaws.com/artwork-images/3e0bf16cd7f7f85763eb3e5b0d841005-435613.jpg" alt="Basquiat artwork" loading="lazy">
-            <p class="visual-break__caption">Jean-Michel Basquiat, <em>Untitled</em> (1982). Sold for $110.5 million.</p>
+            <div class="visual-break--hover-cap">
+                <img class="visual-break__img visual-break__img--painting visual-break__img--bounded" src="https://content-eu-kingandmcgaw-com.s3.eu-west-1.amazonaws.com/artwork-images/3e0bf16cd7f7f85763eb3e5b0d841005-435613.jpg" alt="Basquiat artwork" loading="lazy">
+                <p class="visual-break__caption">Jean-Michel Basquiat, <em>Untitled</em> (1982). Sold for $110.5 million.</p>
+            </div>
         </div>
 
         <!-- Divider -->
@@ -715,22 +945,28 @@
             <span class="section__number">VI</span>
             <h2 class="section__heading">The Luxury Identity</h2>
 
+            <!-- [H] Margin note -->
+            <aside class="margin-note margin-note--right" style="top: 1rem;">Cf. Veblen, <em>Theory of the Leisure Class</em>, 1899</aside>
+
             <p>There's another layer that pure economics misses. It's one that the luxury industry understands better than most: people don't just buy taste — they buy <em>identity</em>.</p>
 
             <p>A person carrying a Birkin is not purchasing a well-made bag. They are purchasing admission to becoming a category of person. Hermès doesn't sell you the bag — you have to be <em>offered</em> it, after proving you belong.</p>
-            
+
             <p>The scarcity is engineered, but the psychology it exploits is real and deep. We are social animals who construct our sense of self through signals, and the best brands have spent decades perfecting the art of becoming those signals.</p>
 
             <p><b>This is exactly what AI is going to do to the entire economy.</b> When anyone can generate a good logo, a passable strategy deck, a functional app, or a well-written report, the question shifts from "can you make it?" to "is it <em>good</em>?" — and who gets to answer that question, and why we believe them, becomes the entire game.</p>
-            
+
             <p>Put simply, every industry is about to learn what fashion and art have always known: when production is easy, curation is everything — and when curation is everywhere, identity becomes the final product.</p>
 
             <p><b>What defines identity? Taste, judgment, and trust.</b></p>
         </section>
 
-        <!-- VISUAL BREAK 6 -->
+        <!-- VISUAL BREAK 6 — [E] hover caption -->
         <div class="visual-break">
-            <img class="visual-break__img visual-break__img--bounded" src="https://media.fashionnetwork.com/cdn-cgi/image/fit=contain,width=1000,height=1000,format=auto/m/0ce8/08a3/8d79/8539/7753/8189/fdc1/ca8b/aa6f/29a0/29a0.jpg" alt="Hermès — engineered scarcity" loading="lazy">
+            <div class="visual-break--hover-cap">
+                <img class="visual-break__img visual-break__img--bounded" src="https://media.fashionnetwork.com/cdn-cgi/image/fit=contain,width=1000,height=1000,format=auto/m/0ce8/08a3/8d79/8539/7753/8189/fdc1/ca8b/aa6f/29a0/29a0.jpg" alt="Hermès — engineered scarcity" loading="lazy">
+                <p class="visual-break__caption">Hermès — engineered scarcity</p>
+            </div>
         </div>
 
         <!-- Divider -->
@@ -750,9 +986,12 @@
 
             <p>Hume would say this was always the foundation of value. We just built elaborate systems — schools, professions, bureaucracies — that obscured it by bundling taste and judgment together with knowledge and execution. AI unbundles that. What's revealed when you strip away the commodity layers is what he always said was underneath: <em>sentiment, refined by experience, made social through trust.</em></p>
 
+            <!-- [E] hover caption on Hokusai -->
             <div class="visual-break" style="margin: 2.5rem 0 2rem;">
-                <img class="visual-break__img visual-break__img--painting" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Tsunami_by_hokusai_19th_century.jpg" alt="Katsushika Hokusai — The Great Wave off Kanagawa" loading="lazy">
-                <p class="visual-break__caption">Katsushika Hokusai, <em>The Great Wave off Kanagawa</em> (c. 1831)</p>
+                <div class="visual-break--hover-cap">
+                    <img class="visual-break__img visual-break__img--painting" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Tsunami_by_hokusai_19th_century.jpg" alt="Katsushika Hokusai — The Great Wave off Kanagawa" loading="lazy">
+                    <p class="visual-break__caption">Katsushika Hokusai, <em>The Great Wave off Kanagawa</em> (c. 1831)</p>
+                </div>
             </div>
 
             <p class="closing">The rest was just scaffolding.</p>
@@ -774,6 +1013,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // ==========================================
+            // INTERSECTION OBSERVER — scroll reveals
+            // ==========================================
             const animatedEls = document.querySelectorAll('.section, .visual-break, .pull-quote, .divider');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -786,8 +1029,90 @@
                 threshold: 0.12,
                 rootMargin: '0px 0px -60px 0px'
             });
-
             animatedEls.forEach(el => observer.observe(el));
+
+            // ==========================================
+            // [M] CLOUD ENGRAVINGS — reveal on scroll
+            // ==========================================
+            const cloudWrap = document.querySelector('.section-wrap--clouds');
+            if (cloudWrap) {
+                const cloudObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('clouds-visible');
+                            cloudObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+                cloudObserver.observe(cloudWrap);
+            }
+
+            // ==========================================
+            // [G] PULL QUOTE TYPEWRITER
+            // ==========================================
+            const pullQuote = document.querySelector('[data-typewriter]');
+            if (pullQuote) {
+                const words = pullQuote.querySelectorAll('.pq-word');
+                const pqObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            words.forEach((word, i) => {
+                                setTimeout(() => word.classList.add('revealed'), i * 220);
+                            });
+                            pqObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                pqObserver.observe(pullQuote);
+            }
+
+            // ==========================================
+            // SCROLL-DRIVEN EFFECTS
+            // (parallax, progress bar, color temp)
+            // ==========================================
+            const progressBar = document.querySelector('.progress-bar');
+            const parallaxEls = document.querySelectorAll('[data-parallax-speed]');
+
+            // [I] Color temperature shift endpoints
+            // Start: #FAF7F2 = rgb(250, 247, 242)
+            // End:   #F5ECDB = rgb(245, 236, 219)
+            const colorStart = { r: 250, g: 247, b: 242 };
+            const colorEnd   = { r: 245, g: 236, b: 219 };
+
+            let ticking = false;
+
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrollPct = Math.min(scrollY / docHeight, 1);
+
+                    // [K] Reading progress bar
+                    if (progressBar) {
+                        progressBar.style.width = (scrollPct * 100) + '%';
+                    }
+
+                    // [A, M] Parallax elements (Hume portraits + clouds)
+                    parallaxEls.forEach(el => {
+                        const speed = parseFloat(el.dataset.parallaxSpeed);
+                        const yOffset = scrollY * speed;
+                        el.style.transform = 'translateY(' + yOffset + 'px)';
+                    });
+
+                    // [I] Color temperature shift
+                    const r = Math.round(colorStart.r + (colorEnd.r - colorStart.r) * scrollPct);
+                    const g = Math.round(colorStart.g + (colorEnd.g - colorStart.g) * scrollPct);
+                    const b = Math.round(colorStart.b + (colorEnd.b - colorStart.b) * scrollPct);
+                    document.body.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+
+                    ticking = false;
+                });
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll(); // Initial call
         });
     </script>
 
