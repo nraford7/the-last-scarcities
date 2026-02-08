@@ -1,55 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" fill="none" stroke="#3D3730">
-  <!-- Main cloud body outline -->
-  <path d="M60,260 Q30,240 40,210 Q15,185 45,160 Q35,130 70,110 Q75,75 120,65 Q135,40 175,42 Q200,22 240,35 Q265,20 300,35 Q330,18 360,40 Q395,30 415,60 Q445,55 455,90 Q475,100 465,135 Q485,160 460,180 Q475,210 445,225 Q460,252 430,260 Z" stroke-width="1.4"/>
-  <!-- Secondary puff -->
-  <path d="M180,42 Q192,24 218,28 Q232,15 258,26" stroke-width="0.9" opacity="0.6"/>
-  <path d="M300,35 Q315,22 335,28" stroke-width="0.7" opacity="0.5"/>
-  <!-- Internal contour lines -->
-  <path d="M100,200 Q140,185 200,190 Q280,186 360,192 Q410,195 440,208" stroke-width="0.5" opacity="0.25"/>
-  <path d="M80,170 Q150,155 230,160 Q320,156 400,162 Q440,166 455,175" stroke-width="0.4" opacity="0.2"/>
-  <!-- Hatching lines - following cloud contour -->
-  <path d="M80,245 Q160,230 290,234 Q390,230 425,242" stroke-width="0.45" opacity="0.55"/>
-  <path d="M75,230 Q165,215 295,220 Q395,216 435,228" stroke-width="0.45" opacity="0.5"/>
-  <path d="M70,215 Q170,198 305,204 Q400,200 445,212" stroke-width="0.42" opacity="0.45"/>
-  <path d="M78,200 Q175,184 310,188 Q400,185 450,196" stroke-width="0.4" opacity="0.42"/>
-  <path d="M85,186 Q182,170 315,174 Q398,170 452,182" stroke-width="0.4" opacity="0.38"/>
-  <path d="M92,172 Q190,158 318,161 Q395,158 455,168" stroke-width="0.38" opacity="0.35"/>
-  <path d="M100,158 Q198,145 322,148 Q392,145 456,155" stroke-width="0.36" opacity="0.32"/>
-  <path d="M110,145 Q208,133 326,136 Q388,133 452,142" stroke-width="0.35" opacity="0.3"/>
-  <path d="M122,132 Q218,122 330,124 Q384,122 448,130" stroke-width="0.33" opacity="0.28"/>
-  <path d="M135,120 Q228,112 332,114 Q378,112 442,118" stroke-width="0.3" opacity="0.25"/>
-  <path d="M150,108 Q238,100 330,102 Q372,100 435,106" stroke-width="0.28" opacity="0.22"/>
-  <path d="M168,96 Q248,90 326,92 Q365,90 425,95" stroke-width="0.26" opacity="0.2"/>
-  <path d="M185,85 Q258,80 318,82 Q355,80 412,84" stroke-width="0.24" opacity="0.18"/>
-  <path d="M205,75 Q265,71 310,73 Q342,71 395,74" stroke-width="0.22" opacity="0.15"/>
-  <!-- Cross-hatching in shadow areas (lower left) -->
-  <path d="M70,252 L95,235" stroke-width="0.35" opacity="0.4"/>
-  <path d="M80,255 L108,238" stroke-width="0.32" opacity="0.38"/>
-  <path d="M92,257 L118,240" stroke-width="0.3" opacity="0.35"/>
-  <path d="M102,258 L128,242" stroke-width="0.28" opacity="0.32"/>
-  <!-- Cross-hatching in shadow areas (lower right) -->
-  <path d="M405,252 L425,236" stroke-width="0.35" opacity="0.4"/>
-  <path d="M415,254 L432,240" stroke-width="0.32" opacity="0.38"/>
-  <path d="M422,256 L438,242" stroke-width="0.3" opacity="0.35"/>
-  <!-- Cross-hatching in deep shadow (underside center) -->
-  <path d="M180,248 L200,238" stroke-width="0.25" opacity="0.3"/>
-  <path d="M195,250 L215,240" stroke-width="0.25" opacity="0.28"/>
-  <path d="M210,252 L230,242" stroke-width="0.25" opacity="0.26"/>
-  <!-- Stipple dots in highlight/top areas -->
-  <circle cx="195" cy="48" r="0.8" fill="#3D3730" opacity="0.15"/>
-  <circle cx="215" cy="42" r="0.7" fill="#3D3730" opacity="0.12"/>
-  <circle cx="235" cy="45" r="0.8" fill="#3D3730" opacity="0.14"/>
-  <circle cx="255" cy="38" r="0.7" fill="#3D3730" opacity="0.12"/>
-  <circle cx="275" cy="40" r="0.6" fill="#3D3730" opacity="0.1"/>
-  <circle cx="310" cy="42" r="0.7" fill="#3D3730" opacity="0.11"/>
-  <circle cx="340" cy="38" r="0.6" fill="#3D3730" opacity="0.1"/>
-  <circle cx="170" cy="55" r="0.6" fill="#3D3730" opacity="0.13"/>
-  <circle cx="145" cy="68" r="0.5" fill="#3D3730" opacity="0.12"/>
-  <circle cx="365" cy="48" r="0.7" fill="#3D3730" opacity="0.1"/>
-  <circle cx="390" cy="55" r="0.6" fill="#3D3730" opacity="0.09"/>
-  <circle cx="130" cy="78" r="0.5" fill="#3D3730" opacity="0.11"/>
-  <circle cx="410" cy="65" r="0.5" fill="#3D3730" opacity="0.08"/>
-  <circle cx="225" cy="55" r="0.5" fill="#3D3730" opacity="0.1"/>
-  <circle cx="285" cy="48" r="0.6" fill="#3D3730" opacity="0.11"/>
-  <circle cx="325" cy="50" r="0.5" fill="#3D3730" opacity="0.09"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340">
+  <!-- Bold woodcut cloud — solid fill with white line shading carved in -->
+  <path d="M55,265 C22,262 8,240 12,215 C-2,195 5,168 32,152 C18,128 35,100 68,88
+           C72,55 108,35 148,40 C162,18 198,8 238,18 C260,2 298,0 325,15
+           C348,4 378,8 398,30 C425,18 455,28 465,55
+           C492,48 510,70 505,98 C522,118 518,150 495,168
+           C512,190 506,215 485,230 C498,252 482,268 455,262
+           C445,278 418,272 405,258 C385,270 355,268 340,258
+           C320,272 290,268 275,258 C248,270 218,266 200,255
+           C178,268 148,264 132,252 C110,266 80,264 68,255 Z"
+        fill="#2A2520"/>
+  <!-- White hatching lines — woodcut shading -->
+  <g stroke="#FAF7F2" fill="none" stroke-linecap="round">
+    <!-- Major horizontal contour lines -->
+    <path d="M75,235 C130,218 220,222 340,218 C400,220 445,228 470,238" stroke-width="2.8"/>
+    <path d="M62,212 C140,194 250,198 365,195 C420,198 465,205 488,215" stroke-width="2.5"/>
+    <path d="M55,190 C148,170 268,175 380,172 C435,175 475,182 498,190" stroke-width="2.3"/>
+    <path d="M60,168 C155,150 278,154 390,150 C440,152 482,160 500,168" stroke-width="2"/>
+    <path d="M72,148 C165,132 285,136 395,132 C445,134 485,140 502,148" stroke-width="1.8"/>
+    <path d="M85,130 C178,115 290,118 398,115 C445,118 486,122 500,128" stroke-width="1.6"/>
+    <path d="M102,112 C192,100 298,103 400,100 C442,102 480,106 496,110" stroke-width="1.4"/>
+    <path d="M122,96 C208,86 305,89 398,86 C438,88 472,92 490,95" stroke-width="1.2"/>
+    <path d="M148,82 C225,74 312,76 392,74 C430,76 460,78 478,82" stroke-width="1"/>
+    <path d="M175,70 C242,64 318,66 382,64 C418,66 448,68 462,70" stroke-width="0.8"/>
+    <path d="M205,58 C258,54 322,56 370,54 C400,56 428,58 445,60" stroke-width="0.7"/>
+    <!-- Deep shadow cross-hatching bottom-left -->
+    <path d="M35,252 L70,228" stroke-width="2"/>
+    <path d="M48,258 L85,232" stroke-width="1.8"/>
+    <path d="M62,262 L100,238" stroke-width="1.6"/>
+    <path d="M78,264 L112,242" stroke-width="1.4"/>
+    <!-- Deep shadow cross-hatching bottom-right -->
+    <path d="M430,252 L462,230" stroke-width="2"/>
+    <path d="M442,256 L472,236" stroke-width="1.8"/>
+    <path d="M455,258 L480,240" stroke-width="1.6"/>
+    <!-- Mid shadow cross-hatching center-bottom -->
+    <path d="M200,250 L228,234" stroke-width="1.2"/>
+    <path d="M215,252 L242,238" stroke-width="1.1"/>
+    <path d="M230,254 L255,240" stroke-width="1"/>
+    <path d="M300,252 L325,238" stroke-width="1.2"/>
+    <path d="M315,254 L338,240" stroke-width="1.1"/>
+    <!-- Puff definition lines -->
+    <path d="M148,40 C158,52 142,68 128,72" stroke-width="1.5"/>
+    <path d="M238,18 C252,32 240,48 225,55" stroke-width="1.4"/>
+    <path d="M325,15 C340,28 332,45 318,52" stroke-width="1.3"/>
+    <path d="M398,30 C412,42 405,58 392,64" stroke-width="1.2"/>
+    <path d="M465,55 C475,68 468,82 455,88" stroke-width="1.1"/>
+  </g>
 </svg>
