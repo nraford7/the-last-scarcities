@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last Scarcities — Noah Raford</title>
+    <meta name="description" content="Taste, Judgment, and Trust in the Age of AI. An essay on what remains valuable when knowledge becomes free.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --cream-warm: #F3EDE3;
+            --ink: #1A1714;
+            --ink-soft: #3D3730;
+            --ink-muted: #6B6158;
+            --accent: #8B2E2E;
+            --accent-deep: #6A1F1F;
+            --rule: #D4C9B8;
+            --rule-light: #E5DDD0;
+            --caption: #9A8E7F;
+
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Libre Baskerville', serif;
+            --font-small-caps: 'Cinzel', serif;
+
+            --content-width: 780px;
+            --wide-width: 960px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            font-size: 17px;
+            scroll-behavior: smooth;
+        }
+
+        @media (max-width: 768px) { html { font-size: 16px; } }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--ink);
+            background-color: var(--cream);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background-color: var(--accent);
+            color: var(--cream);
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+
+        .header {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: clamp(4rem, 12vw, 8rem) 2rem clamp(3rem, 8vw, 5rem);
+            text-align: center;
+        }
+
+        .header__eyebrow {
+            font-family: var(--font-small-caps);
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--caption);
+            margin-bottom: 1.5rem;
+        }
+
+        .header__title {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 8vw, 4.2rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 1rem;
+        }
+
+        .header__subtitle {
+            font-family: var(--font-display);
+            font-size: clamp(1.15rem, 3vw, 1.5rem);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--ink-muted);
+            margin-bottom: 2rem;
+        }
+
+        .header__meta {
+            font-family: var(--font-small-caps);
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--caption);
+        }
+
+        .header__rule {
+            width: 60px;
+            height: 1px;
+            background: var(--rule);
+            margin: 2.5rem auto 0;
+        }
+
+        /* ========================================
+           ARTICLE
+           ======================================== */
+
+        .article {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 0 2rem clamp(3rem, 6vw, 5rem);
+        }
+
+        /* ========================================
+           SECTIONS
+           ======================================== */
+
+        .section {
+            margin-bottom: clamp(3rem, 6vw, 5rem);
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section__number {
+            display: block;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--rule);
+            margin-bottom: 0.8rem;
+        }
+
+        .section__heading {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 400;
+            line-height: 1.25;
+            color: var(--ink);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            hyphens: auto;
+        }
+
+        p:last-child { margin-bottom: 0; }
+
+        strong {
+            font-weight: 700;
+            color: var(--accent-deep);
+        }
+
+        em { font-style: italic; }
+
+        ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        ol li {
+            margin-bottom: 1rem;
+        }
+
+        ol li:last-child { margin-bottom: 0; }
+
+        /* Drop cap */
+        .lead::first-letter {
+            float: left;
+            font-family: var(--font-display);
+            font-size: 4rem;
+            line-height: 0.78;
+            padding-right: 0.5rem;
+            padding-top: 0.25rem;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .aside-voice {
+            font-style: italic;
+            color: var(--ink-muted);
+        }
+
+        /* ========================================
+           BLOCKQUOTES / INSCRIPTIONS
+           ======================================== */
+
+        .inscription {
+            margin: 2.5rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid var(--rule-light);
+            border-bottom: 1px solid var(--rule-light);
+            text-align: center;
+        }
+
+        .inscription__text {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.65;
+            color: var(--ink-soft);
+        }
+
+        /* Pull quote */
+        .pull-quote {
+            max-width: var(--wide-width);
+            margin: clamp(3rem, 6vw, 5rem) auto;
+            padding: clamp(3rem, 6vw, 4.5rem) 2rem;
+            text-align: center;
+            background: var(--cream-warm);
+        }
+
+        .pull-quote__text {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.4;
+            color: var(--accent-deep);
+            max-width: var(--content-width);
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           DIVIDERS
+           ======================================== */
+
+        .divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: clamp(2.5rem, 5vw, 4rem) 0;
+            gap: 1.5rem;
+        }
+
+        .divider__line {
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: var(--rule);
+        }
+
+        .divider__dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--rule);
+        }
+
+        /* ========================================
+           VISUAL BREAKS — between sections
+           ======================================== */
+
+        .visual-break {
+            max-width: var(--wide-width);
+            margin: clamp(2rem, 5vw, 3.5rem) auto;
+            padding: 0 2rem;
+        }
+
+        .visual-break__img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .visual-break__img--contain {
+            object-fit: contain;
+            background: var(--cream-warm);
+        }
+
+        .visual-break__img--painting {
+            max-height: 520px;
+            object-fit: cover;
+        }
+
+        .visual-break__caption {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--caption);
+            text-align: center;
+            margin-top: 0.8rem;
+        }
+
+        .visual-break__quote {
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.45;
+            color: var(--accent-deep);
+            text-align: center;
+            padding: clamp(2rem, 4vw, 3rem) 0;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+
+        .footer {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: clamp(3rem, 8vw, 6rem) 2rem clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            border-top: 1px solid var(--rule-light);
+        }
+
+        .footer__text {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--caption);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer__credit {
+            font-family: var(--font-small-caps);
+            font-size: 0.55rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--rule);
+        }
+
+        /* ========================================
+           CLOSING LINE
+           ======================================== */
+
+        .closing {
+            font-family: var(--font-display);
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            letter-spacing: 0.03em;
+            color: var(--ink-soft);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* ========================================
+           PRINT
+           ======================================== */
+
+        @media print {
+            body { background: white; }
+            .section { opacity: 1; transform: none; }
+            .visual-break { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+        <p class="header__eyebrow">Essay</p>
+        <h1 class="header__title">The Last Scarcities</h1>
+        <p class="header__subtitle">Taste, Judgment, and Trust in the Age of AI</p>
+        <p class="header__meta">Noah Raford &middot; 2024</p>
+        <div class="header__rule"></div>
+    </header>
+
+
+    <!-- ARTICLE -->
+
+    <article class="article">
+
+        <!-- ============================================================
+             SECTION I — The Mind That Contemplates
+             ============================================================ -->
+
+        <section class="section">
+            <span class="section__number">I</span>
+            <h2 class="section__heading">The Mind That Contemplates</h2>
+
+            <p class="lead">David Hume understood something in 1757 that most of us are only now beginning to grasp: value is not a property of things but a quality of the mind.</p>
+
+            <div class="inscription">
+                <p class="inscription__text">"Beauty is no quality in things themselves:<br> it exists merely in the mind which contemplates them."</p>
+            </div>
+
+            <p>Value is, in other words, subjective. That doesn't mean it's arbitrary, nor purely relative. Most people hear "value is subjective" and wrongly think that all opinions are equal. <span class="aside-voice">You do you and I'll do me, don't judge me, that's just, like, your opinion, man.</span></p>
+
+            <!-- VISUAL BREAK 1 -->
+            <div class="visual-break">
+                <img class="visual-break__img visual-break__img--contain" src="https://media1.tenor.com/m/dlLdNF3Z-CUAAAAd/the-big-lebowski-thats-like-your-opinion-man.gif" alt="The Big Lebowski — 'That's just, like, your opinion, man'" loading="lazy">
+                <p class="visual-break__caption">The Big Lebowski (1998)</p>
+            </div>
+            
+            <p>Hume rejects this, and that rejection may be one of the most important things to understand when it comes to the future of AI, work, and the economy.</p>
+        </section>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span class="divider__line"></span>
+            <span class="divider__dot"></span>
+            <span class="divider__line"></span>
+        </div>
+
+        <!-- ============================================================
+             SECTION II — The Better Palate
+             ============================================================ -->
+
+        <section class="section">
+            <span class="section__number">II</span>
+            <h2 class="section__heading">A Better Palate</h2>
+
+            <p>Hume argues that while value originates in the mind, some minds are better at perceiving (or perhaps creating) value than others, just as some palates are better at detecting flavor.</p>
+
+            <p>In other words, some people are better at judging quality and creating value, not because they have access to some universal truth, but because they possess a few specific things, according to Hume, that take time to develop and are scarce: refined senses sharpened through exposure, decades of experience with the kind of thing being judged, a freedom from bias or outside pressure, and what Hume called "good sense" — the capacity to weigh parts against wholes.</p>
+
+            <p>Said another way, some people's judgment <i>is</i> better than others (and therefore more valuable.)</p>
+        </section>
+
+        <!-- VISUAL BREAK 2 -->
+        <div class="visual-break">
+            <img class="visual-break__img visual-break__img--contain" src="https://media1.tenor.com/m/sZt41jOM4zMAAAAd/drinking-wine-rain-drinking.gif" alt="Wine tasting — the trained palate" loading="lazy">
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span class="divider__line"></span>
+            <span class="divider__dot"></span>
+            <span class="divider__line"></span>
+        </div>
+
+        <!-- ============================================================
+             SECTION III — All That is Solid Melts into Air
+             ============================================================ -->
+
+        <section class="section">
+            <span class="section__number">III</span>
+            <h2 class="section__heading">All That is Solid Melts into Air</h2>
+
+            <p>This matters a lot now, and will matter a lot more in the future, because of AI.</p>
+
+            <p>Here is my thesis:</p>
+
+            <ol>
+                <li><b>Large language models are driving the value of knowledge toward zero.</b> Not slowly, not eventually — now. An LLM can retrieve, synthesize, and articulate essentially everything that has ever been written — all human knowledge — on demand.</li>
+                <li><b>Agents, meanwhile, are driving the value of managerial work to zero</b> — commoditizing the coordination, sequencing, and execution that once justified entire professional hierarchies, entire buildings full of people.</li>
+            </ol>
+
+            <p>If knowledge was the <i>what</i> then management was the <i>how</i>, and both are being commoditized at once. This is a big deal.</p>
+            
+            <p>For most of modern history, value flowed to those who could accumulate and deploy specialized information. Consulting, law, medicine, finance — these industries were built on asymmetry. The consultant knew what the client did not. The doctor had studied what the patient had not read.</p>
+
+            <p>The asymmetry that powers entire industries — consulting, law, medicine, software, science, finance and more — is going to crumble thanks to AI.</p>
+            
+            <p><b>Both knowledge and management are becoming like air: essential, but not scarce, and therefore not a source of differentiation or value creation.</b></p>
+
+            <p>So what remains? What will be valuable in a world of AI?</p>
+        </section>
+
+        <!-- VISUAL BREAK 3 -->
+        <div class="visual-break">
+            <img class="visual-break__img visual-break__img--painting" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Giovanni_Paolo_Pannini_-_Capriccio_of_Classical_Ruins_-_WGA16965.jpg" alt="Giovanni Paolo Pannini — Capriccio of Classical Ruins" loading="lazy">
+            <p class="visual-break__caption">Giovanni Paolo Pannini, <em>Capriccio of Classical Ruins</em></p>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span class="divider__line"></span>
+            <span class="divider__dot"></span>
+            <span class="divider__line"></span>
+        </div>
+
+        <!-- ============================================================
+             SECTION IV — What is "Taste"?
+             ============================================================ -->
+
+        <section class="section">
+            <span class="section__number">IV</span>
+            <h2 class="section__heading">What is "Taste"?</h2>
+
+            <p>Hume spent his career trying to answer this question. His answers were <strong>taste, judgment, and trust</strong>.</p>
+
+            <p><strong>Taste.</strong> When a system can generate a thousand adequate solutions in an hour, the person who can look at all thousand and say <em>this one, because it has the right weight and tone for this moment</em> becomes the bottleneck. Hume was emphatic that this capacity is not arbitrary preference — it develops through experience, comparison, and what he called "delicacy of sentiment." It cannot be shortcut. If it could be formalized into rules, it would itself become knowledge and be commoditized in turn.</p>
+
+            <p><strong>Judgment.</strong> Judgment is taste applied to action under genuine uncertainty. Should the company prioritize growth or stability? Should the policy favor efficiency or equity? An LLM can provide every argument on every side. An agent can model every scenario. But someone has to <em>decide</em>, and that decision draws on a sense of proportion, of what matters, of what the moment demands — capacities reason cannot provide on its own.</p>
+
+            <p><strong>Trust.</strong> In a world where anyone can generate convincing text, realistic images, and plausible-sounding analysis — where the surface markers of competence are trivially reproducible — trust becomes the scarce verification layer. You don't just need someone with good taste; you need someone whose taste you <em>trust</em>, whose track record you know, whose judgment has been tested against reality. Trust is the social infrastructure that makes taste and judgment actionable.</p>
+        </section>
+
+        <!-- PULL QUOTE -->
+        <aside class="pull-quote">
+            <p class="pull-quote__text">"Sentiment, refined by experience,<br> made social through trust."</p>
+        </aside>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span class="divider__line"></span>
+            <span class="divider__dot"></span>
+            <span class="divider__line"></span>
+        </div>
+
+        <!-- ============================================================
+             SECTION V — Life Imitates the Art Market
+             ============================================================ -->
+
+        <section class="section">
+            <span class="section__number">V</span>
+            <h2 class="section__heading">Life Imitates the Art Market</h2>
+
+            <p>The art world has understood this for centuries — it just never had the language of economics to explain why.</p>
+
+            <p>A painting is, materially, canvas and pigment. The physical inputs are worth almost nothing. And yet a Basquiat sells for $110 million while a technically superior painting by an unknown artist sells for $400 at a street fair. This is not a market mispricing. It is a market that has <em>correctly identified what's scarce</em>.</p>
+
+            <p>The scarce thing is not the object. It's the chain of judgment surrounding it: the artist's vision, the curator who recognized it early, the gallery that staked its reputation on showing it, the critic whose essay framed why it mattered, and the collector whose willingness to pay became its own signal of worth. Every transaction in the art market is a transaction in trust and taste, layered on top of one another.</p>
+
+            <p>Larry Gagosian doesn't run the world's most powerful gallery because he has more information about art than anyone else. He runs it because enough people with enough capital trust his <em>taste</em>. That judgment is the product. Everything else — the white-walled spaces, the glossy catalogs, the Venice Biennale dinners — is just infrastructure for delivering it.</p>
+        </section>
+
+        <!-- VISUAL BREAK 5 -->
+        <div class="visual-break">
+            <img class="visual-break__img visual-break__img--painting" src="https://content-eu-kingandmcgaw-com.s3.eu-west-1.amazonaws.com/artwork-images/3e0bf16cd7f7f85763eb3e5b0d841005-435613.jpg" alt="Basquiat artwork" loading="lazy">
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span class="divider__line"></span>
+            <span class="divider__dot"></span>
+            <span class="divider__line"></span>
+        </div>
+
+        <!-- ============================================================
+             SECTION VI — The Identity Layer
+             ============================================================ -->
+
+        <section class="section">
+            <span class="section__number">VI</span>
+            <h2 class="section__heading">The Identity Layer</h2>
+
+            <p>There's another layer that pure economics misses, and it's one the luxury industry understands better than anyone: people don't just buy taste — they buy <em>identity</em>.</p>
+
+            <p>A woman carrying a Birkin is not purchasing a well-made bag. She is purchasing admission to a category of person. Hermès doesn't sell you the bag — you have to be <em>offered</em> it, after proving you belong. The scarcity is engineered, but the psychology it exploits is real and deep. We are social animals who construct our sense of self through signals, and the best brands have spent decades perfecting the art of becoming those signals.</p>
+
+            <p>This is exactly the economy that AI is creating everywhere else. When anyone can generate a competent logo, a passable strategy deck, a functional app, or a well-written report, the question shifts from "can you make it?" to "is it <em>good</em>?" — and who gets to answer that question, and why we believe them, becomes the entire game. Put simply, every industry is about to learn what fashion and art have always known: when production is easy, curation is everything — and when curation is everywhere, identity becomes the final product.</p>
+        </section>
+
+        <!-- VISUAL BREAK 6 -->
+        <div class="visual-break">
+            <img class="visual-break__img" src="https://media.fashionnetwork.com/cdn-cgi/image/fit=contain,width=1000,height=1000,format=auto/m/0ce8/08a3/8d79/8539/7753/8189/fdc1/ca8b/aa6f/29a0/29a0.jpg" alt="Hermès — engineered scarcity" loading="lazy">
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span class="divider__line"></span>
+            <span class="divider__dot"></span>
+            <span class="divider__line"></span>
+        </div>
+
+        <!-- ============================================================
+             SECTION VII — The Great Repricing
+             ============================================================ -->
+
+        <section class="section">
+            <span class="section__number">VII</span>
+            <h2 class="section__heading">The Great Repricing</h2>
+
+            <p>Now apply that logic everywhere.</p>
+
+            <p>In software, if agents can build any application on demand, the product itself stops being defensible. What becomes defensible is the taste layer on top — the curation, the specific point of view about how a tool should feel and what it should prioritize. When any agent can spin up a competent tool in minutes, choosing software becomes less like purchasing infrastructure and more like choosing what to wear.</p>
+
+            <p>In consulting, any executive can now generate a McKinsey-quality analysis in an afternoon. What they <em>can't</em> generate is the senior partner's hard-won instinct that the real problem isn't market entry at all — it's that the CEO and CFO have fundamentally different visions and no framework will matter until that's resolved. The consulting firm of the future looks less like McKinsey and more like a blue-chip gallery: a small roster of trusted advisors whose clients are hiring <em>them</em>, not the logo.</p>
+
+            <p>The same fracture opens across law, finance, medicine — every knowledge industry. The common thread is uncomfortable: you are no longer selling your time, your expertise, or your output. You are selling <em>yourself</em> — your taste, your name, your track record, and the identity that association with you confers. The people who insist the work should speak for itself will learn what the art world learned long ago: in a market of infinite supply, the work never speaks for itself. Someone has to speak for it. And that someone <em>is</em> the product.</p>
+        </section>
+
+        <!-- VISUAL BREAK 7 -->
+        <div class="visual-break">
+            <p class="visual-break__quote">"The consulting firm of the future looks less like McKinsey and more like a blue-chip gallery."</p>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span class="divider__line"></span>
+            <span class="divider__dot"></span>
+            <span class="divider__line"></span>
+        </div>
+
+        <!-- ============================================================
+             SECTION VIII — Becoming the Bottleneck
+             ============================================================ -->
+
+        <section class="section">
+            <span class="section__number">VIII</span>
+            <h2 class="section__heading">Becoming the Bottleneck</h2>
+
+            <p>In the future, you will be paid for your taste, judgment, and trust. The path forward isn't to compete with AI on knowledge or execution — that race is already lost. It's to become the person whose judgment others rely on, whose taste is hard to replicate, and whose track record makes you worth trusting.</p>
+
+            <p>Concretely, that means developing deep domain experience in specific communities of shared practice — the kind that gives you intuitions that can't be articulated as rules and trust that can't be delegated. It means cultivating taste through relentless exposure to both excellence and mediocrity, so you can tell the difference instantly and explain why. And it means building a reputation — a public record of good calls, honest assessments, and reliable discernment — because in a world of infinite generated content, your name becomes your most valuable asset.</p>
+
+            <p>The person who thrives in this world isn't the one who knows the most or manages the most people. It's the one who can sit in front of a thousand AI-generated options and say <em>this one</em>, and be right, and be believed.</p>
+
+            <p>AI doesn't diminish this person — it supercharges them. It removes the drudgery that used to consume 80% of their time and lets them operate almost entirely in the zone where they add unique value: curating, deciding, and standing behind their choices. One person with great taste, sound judgment, and a trusted reputation, armed with AI, can now do what once required a team of fifty — or 500. That's not a threat. That's the greatest opportunity for individual agency since the invention of the printing press. But only if you've done the slow, unglamorous work of becoming someone worth listening to in the first place.</p>
+        </section>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span class="divider__line"></span>
+            <span class="divider__dot"></span>
+            <span class="divider__line"></span>
+        </div>
+
+        <!-- ============================================================
+             SECTION IX — The Rest Was Just Scaffolding
+             ============================================================ -->
+
+        <section class="section">
+            <span class="section__number">IX</span>
+            <h2 class="section__heading">The Rest Was Just Scaffolding</h2>
+
+            <p>Hume would say this was always the foundation of value. We just built elaborate systems — schools, professions, bureaucracies — that obscured it by bundling taste and judgment together with knowledge and execution. AI unbundles that. What's revealed when you strip away the commodity layers is what he always said was underneath: <em>sentiment, refined by experience, made social through trust.</em></p>
+
+            <p class="closing">The rest was just scaffolding.</p>
+        </section>
+
+    </article>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+        <p class="footer__text">After David Hume, "Of the Standard of Taste" (1757)</p>
+        <p class="footer__credit">Noah Raford</p>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -60px 0px'
+            });
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+
+</body>
+</html>
