@@ -177,7 +177,9 @@
         p {
             margin-bottom: 1.5rem;
             text-align: left;
-            hyphens: auto;
+            hyphens: none;
+            overflow-wrap: break-word;
+            word-break: normal;
         }
 
         p:last-child { margin-bottom: 0; }
@@ -296,6 +298,8 @@
 
         .visual-break__img {
             width: 100%;
+            max-width: 100%;
+            height: auto;
             display: block;
             object-fit: cover;
         }
@@ -373,6 +377,15 @@
         /* ========================================
            PRINT
            ======================================== */
+
+        @media (max-width: 480px) {
+            .header { padding: 3rem 1.2rem 2rem; }
+            .article { padding: 0 1.2rem 2rem; }
+            .visual-break { padding: 0 1rem; }
+            .pull-quote { padding: 2rem 1.2rem; }
+            .footer { padding: 2rem 1.2rem; }
+            .inscription { margin-left: 0; margin-right: 0; }
+        }
 
         @media print {
             body { background: white; }
