@@ -76,6 +76,21 @@
         .header-wrap {
             position: relative;
             overflow: hidden;
+            background: linear-gradient(180deg, var(--cream-warm) 0%, var(--cream) 100%);
+        }
+
+        .header-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+            pointer-events: none;
+            mix-blend-mode: multiply;
         }
 
         .header-wrap__hume {
@@ -186,12 +201,36 @@
             transform: translateY(0);
         }
 
+        /* Animate visual breaks, pull quotes, dividers on scroll */
+        .visual-break,
+        .pull-quote {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 1.1s ease, transform 1.1s ease;
+        }
+
+        .visual-break.visible,
+        .pull-quote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .divider {
+            opacity: 0;
+            transition: opacity 0.7s ease 0.1s;
+        }
+
+        .divider.visible {
+            opacity: 1;
+        }
+
         .section__number {
             display: block;
             text-align: center;
             font-family: var(--font-display);
-            font-size: 1rem;
+            font-size: 1.15rem;
             font-style: italic;
+            letter-spacing: 0.08em;
             color: var(--rule);
             margin-bottom: 0.8rem;
         }
@@ -244,6 +283,7 @@
             padding-top: 0.25rem;
             color: var(--accent);
             font-weight: 400;
+            opacity: 0.8;
         }
 
         .aside-voice {
@@ -279,6 +319,7 @@
             padding: clamp(3rem, 6vw, 4.5rem) 2rem;
             text-align: center;
             background: var(--cream-warm);
+            box-shadow: inset 0 1px 0 var(--rule-light), inset 0 -1px 0 var(--rule-light);
         }
 
         .pull-quote__text {
@@ -301,21 +342,20 @@
             justify-content: center;
             align-items: center;
             margin: clamp(2.5rem, 5vw, 4rem) 0;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .divider__line {
             flex: 1;
-            max-width: 80px;
+            max-width: 60px;
             height: 1px;
             background: var(--rule);
         }
 
-        .divider__dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--rule);
+        .divider__fleuron {
+            font-size: 1rem;
+            color: var(--rule);
+            line-height: 1;
         }
 
         /* ========================================
@@ -334,6 +374,8 @@
             height: auto;
             display: block;
             object-fit: cover;
+            box-shadow: 0 2px 24px rgba(26, 23, 20, 0.07);
+            border: 1px solid var(--rule-light);
         }
 
         .visual-break__img--contain {
@@ -343,6 +385,11 @@
 
         .visual-break__img--painting {
             max-height: 520px;
+            object-fit: cover;
+        }
+
+        .visual-break__img--bounded {
+            max-height: 560px;
             object-fit: cover;
         }
 
@@ -369,12 +416,23 @@
            FOOTER
            ======================================== */
 
+        .footer-wrap {
+            background: var(--cream-warm);
+            border-top: 1px solid var(--rule-light);
+        }
+
         .footer {
             max-width: var(--content-width);
             margin: 0 auto;
-            padding: clamp(3rem, 8vw, 6rem) 2rem clamp(2rem, 4vw, 3rem);
+            padding: clamp(3.5rem, 8vw, 6rem) 2rem clamp(2.5rem, 4vw, 3.5rem);
             text-align: center;
-            border-top: 1px solid var(--rule-light);
+        }
+
+        .footer__ornament {
+            font-size: 0.9rem;
+            color: var(--rule);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5em;
         }
 
         .footer__text {
@@ -411,17 +469,18 @@
            ======================================== */
 
         @media (max-width: 480px) {
-            .header { padding: 3rem 1.2rem 2rem; }
+            .header { padding: 4rem 1.2rem 2rem; }
+            .inscription { padding: 1.5rem 0; }
             .article { padding: 0 1.2rem 2rem; }
             .visual-break { padding: 0 1rem; }
             .pull-quote { padding: 2rem 1.2rem; }
-            .footer { padding: 2rem 1.2rem; }
+            .footer { padding: 2.5rem 1.2rem; }
             .inscription { margin-left: 0; margin-right: 0; }
         }
 
         @media print {
             body { background: white; }
-            .section { opacity: 1; transform: none; }
+            .section, .visual-break, .pull-quote, .divider { opacity: 1; transform: none; }
             .visual-break { break-inside: avoid; }
         }
     </style>
@@ -475,7 +534,7 @@
         <!-- Divider -->
         <div class="divider">
             <span class="divider__line"></span>
-            <span class="divider__dot"></span>
+            <span class="divider__fleuron">&#10087;</span>
             <span class="divider__line"></span>
         </div>
 
@@ -510,7 +569,7 @@
         <!-- Divider -->
         <div class="divider">
             <span class="divider__line"></span>
-            <span class="divider__dot"></span>
+            <span class="divider__fleuron">&#10087;</span>
             <span class="divider__line"></span>
         </div>
 
@@ -545,7 +604,7 @@
         <!-- Divider -->
         <div class="divider">
             <span class="divider__line"></span>
-            <span class="divider__dot"></span>
+            <span class="divider__fleuron">&#10087;</span>
             <span class="divider__line"></span>
         </div>
 
@@ -574,7 +633,7 @@
         <!-- Divider -->
         <div class="divider">
             <span class="divider__line"></span>
-            <span class="divider__dot"></span>
+            <span class="divider__fleuron">&#10087;</span>
             <span class="divider__line"></span>
         </div>
 
@@ -612,7 +671,7 @@
         <!-- Divider -->
         <div class="divider">
             <span class="divider__line"></span>
-            <span class="divider__dot"></span>
+            <span class="divider__fleuron">&#10087;</span>
             <span class="divider__line"></span>
         </div>
 
@@ -637,14 +696,14 @@
 
         <!-- VISUAL BREAK 5 -->
         <div class="visual-break">
-            <img class="visual-break__img visual-break__img--painting" src="https://content-eu-kingandmcgaw-com.s3.eu-west-1.amazonaws.com/artwork-images/3e0bf16cd7f7f85763eb3e5b0d841005-435613.jpg" alt="Basquiat artwork" loading="lazy">
+            <img class="visual-break__img visual-break__img--painting visual-break__img--bounded" src="https://content-eu-kingandmcgaw-com.s3.eu-west-1.amazonaws.com/artwork-images/3e0bf16cd7f7f85763eb3e5b0d841005-435613.jpg" alt="Basquiat artwork" loading="lazy">
             <p class="visual-break__caption">Jean-Michel Basquiat, <em>Untitled</em> (1982). Sold for $110.5 million.</p>
         </div>
 
         <!-- Divider -->
         <div class="divider">
             <span class="divider__line"></span>
-            <span class="divider__dot"></span>
+            <span class="divider__fleuron">&#10087;</span>
             <span class="divider__line"></span>
         </div>
 
@@ -671,13 +730,13 @@
 
         <!-- VISUAL BREAK 6 -->
         <div class="visual-break">
-            <img class="visual-break__img" src="https://media.fashionnetwork.com/cdn-cgi/image/fit=contain,width=1000,height=1000,format=auto/m/0ce8/08a3/8d79/8539/7753/8189/fdc1/ca8b/aa6f/29a0/29a0.jpg" alt="Hermès — engineered scarcity" loading="lazy">
+            <img class="visual-break__img visual-break__img--bounded" src="https://media.fashionnetwork.com/cdn-cgi/image/fit=contain,width=1000,height=1000,format=auto/m/0ce8/08a3/8d79/8539/7753/8189/fdc1/ca8b/aa6f/29a0/29a0.jpg" alt="Hermès — engineered scarcity" loading="lazy">
         </div>
 
         <!-- Divider -->
         <div class="divider">
             <span class="divider__line"></span>
-            <span class="divider__dot"></span>
+            <span class="divider__fleuron">&#10087;</span>
             <span class="divider__line"></span>
         </div>
 
@@ -704,15 +763,18 @@
 
     <!-- FOOTER -->
 
-    <footer class="footer">
-        <p class="footer__text">After David Hume, "Of the Standard of Taste" (1757)</p>
-        <p class="footer__credit">Noah Raford</p>
-    </footer>
+    <div class="footer-wrap">
+        <footer class="footer">
+            <p class="footer__ornament">&#10087;</p>
+            <p class="footer__text">After David Hume, "Of the Standard of Taste" (1757)</p>
+            <p class="footer__credit">Noah Raford</p>
+        </footer>
+    </div>
 
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.section');
+            const animatedEls = document.querySelectorAll('.section, .visual-break, .pull-quote, .divider');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -721,11 +783,11 @@
                     }
                 });
             }, {
-                threshold: 0.08,
+                threshold: 0.12,
                 rootMargin: '0px 0px -60px 0px'
             });
 
-            sections.forEach(section => observer.observe(section));
+            animatedEls.forEach(el => observer.observe(el));
         });
     </script>
 
