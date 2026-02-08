@@ -73,7 +73,39 @@
            HEADER
            ======================================== */
 
+        .header-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-wrap__hume {
+            position: absolute;
+            top: 0;
+            width: clamp(140px, 18vw, 280px);
+            height: auto;
+            opacity: 0.12;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+
+        .header-wrap__hume--left {
+            left: 0;
+        }
+
+        .header-wrap__hume--right {
+            right: 0;
+        }
+
+        @media (max-width: 900px) {
+            .header-wrap__hume { opacity: 0.07; }
+        }
+
+        @media (max-width: 580px) {
+            .header-wrap__hume { display: none; }
+        }
+
         .header {
+            position: relative;
             max-width: var(--content-width);
             margin: 0 auto;
             padding: clamp(4rem, 12vw, 8rem) 2rem clamp(3rem, 8vw, 5rem);
@@ -398,13 +430,17 @@
 
     <!-- HEADER -->
 
-    <header class="header">
-        <p class="header__eyebrow">Essay</p>
-        <h1 class="header__title">The Last Scarcities</h1>
-        <p class="header__subtitle">Taste, Judgment, and Trust in the Age of AI</p>
-        <p class="header__meta">Noah Raford &middot; 2024</p>
-        <div class="header__rule"></div>
-    </header>
+    <div class="header-wrap">
+        <img class="header-wrap__hume header-wrap__hume--left" src="Hume_L.jpg" alt="" aria-hidden="true">
+        <img class="header-wrap__hume header-wrap__hume--right" src="Hume_R.jpg" alt="" aria-hidden="true">
+        <header class="header">
+            <p class="header__eyebrow">Essay</p>
+            <h1 class="header__title">The Last Scarcities</h1>
+            <p class="header__subtitle">Taste, Judgment, and Trust in the Age of AI</p>
+            <p class="header__meta">Noah Raford &middot; 2024</p>
+            <div class="header__rule"></div>
+        </header>
+    </div>
 
 
     <!-- ARTICLE -->
@@ -422,10 +458,10 @@
             <p class="lead">David Hume understood something in 1757 that most of us are only now beginning to grasp: value is not a property of things but a quality of the mind.</p>
 
             <div class="inscription">
-                <p class="inscription__text">"Beauty is no quality in things themselves:<br> it exists merely in the mind which contemplates them."</p>
+                <p class="inscription__text">"Beauty is no quality in things themselves: it exists merely in the mind which contemplates them."</p>
             </div>
 
-            <p>Value is, in other words, subjective. That doesn't mean it's arbitrary, nor purely relative. Most people hear "value is subjective" and wrongly think that all opinions are equal. <span class="aside-voice">You do you and I'll do me, don't judge me, that's just, like, your opinion, man.</span></p>
+            <p> Value is, in other words, subjective. That doesn't mean it's arbitrary, nor purely relative. Most people hear "value is subjective" and wrongly think that all opinions are equal. <span class="aside-voice">You do you and I'll do me, don't judge me, that's just, like, your opinion, man.</span></p>
 
             <!-- VISUAL BREAK 1 -->
             <div class="visual-break">
